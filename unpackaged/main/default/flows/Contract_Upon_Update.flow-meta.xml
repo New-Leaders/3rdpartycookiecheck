@@ -1,0 +1,1081 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <decisions>
+        <name>Contract_Status_Related_History</name>
+        <label>Contract Status Related History</label>
+        <locationX>2390</locationX>
+        <locationY>94</locationY>
+        <defaultConnector>
+            <targetReference>New_Contract</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default</defaultConnectorLabel>
+        <rules>
+            <name>Status_is_Changed_with_Current_History</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.CurConSgHst__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Current_Account_History_with_End_Date</targetReference>
+            </connector>
+            <label>Status is Changed with Current History</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks for Contract Type</description>
+        <name>DECContract_Type</name>
+        <label>Contract Type</label>
+        <locationX>1362</locationX>
+        <locationY>1645</locationY>
+        <defaultConnectorLabel>Test or Grandfathered</defaultConnectorLabel>
+        <rules>
+            <name>OCOpportunity_Contract</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Opp_Contract_Rec_Type.Id</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.RecordTypeId</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Opportunity_Type_Amendment</targetReference>
+            </connector>
+            <label>Opportunity Contract</label>
+        </rules>
+        <rules>
+            <name>OCProcurement_Contract</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Proc_Contract_Rec_Type_0.Id</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.RecordTypeId</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Procurement_Legal_Under_Review_Filled</targetReference>
+            </connector>
+            <label>Procurement Contract</label>
+        </rules>
+        <rules>
+            <name>OCOther_Contract</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_OTHR_Contract_Rec_Type.Id</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.RecordTypeId</elementReference>
+                </rightValue>
+            </conditions>
+            <label>Other Contract</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>DECOpportunity_Link_Present</name>
+        <label>Opportunity Link Present?</label>
+        <locationX>1351</locationX>
+        <locationY>706</locationY>
+        <defaultConnector>
+            <targetReference>Update_Contract_NameNoOpp</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Has_Linked_Opportunity</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Related_Opportunity__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Related_Opportunity</targetReference>
+            </connector>
+            <label>Has Linked Opportunity</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>New_Contract</name>
+        <label>New Contract</label>
+        <locationX>2552</locationX>
+        <locationY>566</locationY>
+        <defaultConnector>
+            <targetReference>DECOpportunity_Link_Present</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Changed Contract</defaultConnectorLabel>
+        <rules>
+            <name>New</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>FRMContractIsNew</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.CurConSgHst__r.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_New_Contract_Status_History</targetReference>
+            </connector>
+            <label>New or blank status</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Decide if Opportunity Amendment</description>
+        <name>Opportunity_Type_Amendment</name>
+        <label>Opportunity New or Amendment</label>
+        <locationX>707</locationX>
+        <locationY>1679</locationY>
+        <defaultConnectorLabel>Not Applicable</defaultConnectorLabel>
+        <rules>
+            <name>OCAmendedSWOpLink</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Contract_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Amendment to Existing Contract</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Sent- Pending</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Related_Opportunity__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Related_Opportunities_Most_Recent_Contract</targetReference>
+            </connector>
+            <label>Amendment submitted with opportunity link status changed</label>
+        </rules>
+        <rules>
+            <name>Amendment_Rejected_W_Opp_Link</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Contract_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Amendment to Existing Contract</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Rejected</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Related_Opportunity__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Opportunity_When_Amendment_Is_Rejected</targetReference>
+            </connector>
+            <label>Amendment Rejected W Opp Link status changed</label>
+        </rules>
+        <rules>
+            <name>OCNew_SWOpLink</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Contract_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>New Contract</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Sent- Pending</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Related_Opportunity__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Grant_Opportunity_Record_Type</targetReference>
+            </connector>
+            <label>New Opportunity Contract submitted w opportunity link status changed</label>
+        </rules>
+        <rules>
+            <name>OCOpportunity_Contract_Set_to_FinalwOpLinkNotFulFund</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Final</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Related_Opportunity__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Related_Opportunity__r.StageName</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Fully Funded</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Related_Opportunity__r.StageName</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Written/Signed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Opportunity_Stage_to_Written</targetReference>
+            </connector>
+            <label>Opportunity Contract Set to Final w Opp Link Not Fully Funded or Written</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check if procurement legal vendor review filled</description>
+        <name>Procurement_Finance_Under_Review_Filled</name>
+        <label>Procurement Finance Under Review Filled</label>
+        <locationX>2354</locationX>
+        <locationY>1388</locationY>
+        <defaultConnectorLabel>Procurement Finance vendor review Not Changed</defaultConnectorLabel>
+        <rules>
+            <name>Procurement_FInance_vendor_review_is_changed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Finance_Vendor_Review_Started__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Procurement_Type__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Non-Consulting Services</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Procurement_Type__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Consulting</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Finance_External_Request</targetReference>
+            </connector>
+            <label>Procurement Finance vendor review is changed</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check if procurement legal vendor review filled</description>
+        <name>Procurement_Legal_Under_Review_Filled</name>
+        <label>Procurement Legal Under Review Filled</label>
+        <locationX>1744</locationX>
+        <locationY>1477</locationY>
+        <defaultConnector>
+            <targetReference>Procurement_Finance_Under_Review_Filled</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Procurement Legal vendor review Not Changed</defaultConnectorLabel>
+        <rules>
+            <name>Procurement_Legal_vendor_review_is_changed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Legal_Vendor_Review_Started__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Legal_External_Request</targetReference>
+            </connector>
+            <label>Procurement Legal vendor review is changed</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>FRMContractAutoName</name>
+        <dataType>String</dataType>
+        <expression>LEFT({!$Record.Account.Name}+TEXT(MONTH({!$Record.StartDate}))+&quot;/&quot; +TEXT(DAY({!$Record.StartDate}))+&quot;/&quot; +TEXT(YEAR({!$Record.StartDate}))+&quot; Contract&quot;,80)</expression>
+    </formulas>
+    <formulas>
+        <name>FRMContractIsNew</name>
+        <dataType>Boolean</dataType>
+        <expression>ISNEW()</expression>
+    </formulas>
+    <formulas>
+        <name>FRMContractStatusHistoryName</name>
+        <dataType>String</dataType>
+        <expression>LEFT({!$Record.Name} + &quot; - &quot; + TEXT( {!$Record.Status}) + &quot; - &quot; + TEXT({!FRMToday}),80)</expression>
+    </formulas>
+    <formulas>
+        <name>FRMDescFieldLength</name>
+        <dataType>Number</dataType>
+        <expression>Len({!$Record.Description} )</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <description>Default Document Retention Date</description>
+        <name>FRMDocRetDefault</name>
+        <dataType>Date</dataType>
+        <expression>IF(NOT(ISBLANK({!$Record.EndDate})), {!$Record.EndDate} + 2555,
+IF(NOT(ISBLANK( {!$Record.Amended_End_Date__c} )),{!$Record.Amended_End_Date__c} + 2555,
+NULL))</expression>
+    </formulas>
+    <formulas>
+        <name>FRMExternalFinanceReviewName</name>
+        <dataType>String</dataType>
+        <expression>TEXT(NOW()) &amp; &quot; - &quot; &amp; LEFT(&quot;Finance - &quot; &amp; {!$Record.Account.Name},40)</expression>
+    </formulas>
+    <formulas>
+        <description>defaultnaming for new legal review record</description>
+        <name>FRMExternalLegalReviewName</name>
+        <dataType>String</dataType>
+        <expression>TEXT(NOW()) &amp; &quot; - &quot; &amp; LEFT(&quot;Legal - &quot; &amp; {!$Record.Account.Name},40)</expression>
+    </formulas>
+    <formulas>
+        <name>FRMInitialFinanceReviewStatus</name>
+        <dataType>String</dataType>
+        <expression>IF(ISPICKVAL({!$Record.Procurement_Instrument__c}, &quot;Honorarium&quot;), &quot;Under Review&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Materials&quot;)  , &quot;Not Required&quot;,
+      IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Technology hardware purchase/lease&quot;) , &quot;Not Required&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Technology subscriptions/software&quot;) , &quot;Not Required&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Hotel&quot;) , &quot;Not Required&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Restaurants/catering&quot;) , &quot;Not Required&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Space rental&quot;) , &quot;Not Required&quot;,
+      IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Consulting&quot;) , &quot;Skip&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Non-Consulting Services&quot;) , &quot;Skip&quot;,
+
+
+&quot;Under Review&quot;
+)))))))))</expression>
+    </formulas>
+    <formulas>
+        <description>The initial legal review based upon logic of procurement type pre-fills the external legal status based on logic</description>
+        <name>FRMInitialLegalReviewStatus</name>
+        <dataType>String</dataType>
+        <expression>IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Materials&quot;) &amp;&amp; !ISPICKVAL( {!$Record.Funding_Source_Type__c}, &quot;Federal&quot;)  , &quot;Not Required&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Materials&quot;) &amp;&amp; ISPICKVAL( {!$Record.Funding_Source_Type__c}, &quot;Federal&quot;) &amp;&amp; {!$Record.Account.VndLstQ__c} +365 &gt;= TODAY() , &quot;Not Required&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Technology hardware purchase/lease&quot;) , &quot;Not Required&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Technology subscriptions/software&quot;) , &quot;Not Required&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Hotel&quot;) , &quot;Not Required&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Restaurants/catering&quot;) , &quot;Not Required&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Space rental&quot;) , &quot;Not Required&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Lease&quot;) , &quot;Not Required&quot;,
+     IF(ISPICKVAL({!$Record.Procurement_Instrument__c}, &quot;Honorarium&quot;), &quot;Not Required&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Consulting&quot;) &amp;&amp; {!$Record.Account.VndLstQ__c}  +365 &gt;= TODAY(), &quot;Not Required&quot;,
+     IF( ISPICKVAL({!$Record.Procurement_Type__c}, &quot;Non-Consulting Services&quot;) &amp;&amp; {!$Record.Account.VndLstQ__c}  +365 &gt;= TODAY(), &quot;Not Required&quot;,
+
+
+&quot;Under Review&quot;
+)))))))))))</expression>
+    </formulas>
+    <formulas>
+        <name>FRMOppContractAutoName</name>
+        <dataType>String</dataType>
+        <expression>TRIM(LEFT({!Get_Related_Opportunity.Name}+&quot; Contract&quot;,80))</expression>
+    </formulas>
+    <formulas>
+        <name>FRMRetainIndefiniteDefault</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(  {!$Record.Open_Ended_No_End_Date__c}= TRUE, TRUE, 
+IF( {!$Record.Retain_Indefinitely__c}= TRUE, TRUE,
+FALSE))</expression>
+    </formulas>
+    <formulas>
+        <name>FRMToday</name>
+        <dataType>Date</dataType>
+        <expression>TODAY()</expression>
+    </formulas>
+    <interviewLabel>Contract - Upon Update {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Contract - Created or Updated</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Creates Legal External Request and notifies legal team</description>
+        <name>Create_Finance_External_Request</name>
+        <label>Create Finance External Request</label>
+        <locationX>2721</locationX>
+        <locationY>1491</locationY>
+        <inputAssignments>
+            <field>Account__c</field>
+            <value>
+                <elementReference>$Record.Account.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ApStat__c</field>
+            <value>
+                <elementReference>FRMInitialFinanceReviewStatus</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Ctrt__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>FRMExternalFinanceReviewName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Request_Type__c</field>
+            <value>
+                <stringValue>Finance Vendor Document Review</stringValue>
+            </value>
+        </inputAssignments>
+        <object>NLExLgRq__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <description>Creates Legal External Request and notifies legal team</description>
+        <name>Create_Legal_External_Request</name>
+        <label>Create Legal External Request</label>
+        <locationX>2082</locationX>
+        <locationY>1337</locationY>
+        <connector>
+            <targetReference>Procurement_Finance_Under_Review_Filled</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Account__c</field>
+            <value>
+                <elementReference>$Record.Account.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ApStat__c</field>
+            <value>
+                <elementReference>FRMInitialLegalReviewStatus</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Ctrt__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>FRMExternalLegalReviewName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Request_Type__c</field>
+            <value>
+                <stringValue>Legal Vendor Document Review</stringValue>
+            </value>
+        </inputAssignments>
+        <object>NLExLgRq__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_New_Contract_Status_History</name>
+        <label>Create New Contract Status History</label>
+        <locationX>1426</locationX>
+        <locationY>474</locationY>
+        <assignRecordIdToReference>VarNewStatusRecordID</assignRecordIdToReference>
+        <inputAssignments>
+            <field>Contract__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>FRMContractStatusHistoryName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Stage__c</field>
+            <value>
+                <elementReference>$Record.Status</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>StartDate__c</field>
+            <value>
+                <elementReference>FRMToday</elementReference>
+            </value>
+        </inputAssignments>
+        <object>NLContract_Stage_History__c</object>
+    </recordCreates>
+    <recordLookups>
+        <name>Get_CONTRACT_INCOME_Opportunity_Record_Type</name>
+        <label>Get CONTRACT INCOME Opportunity Record Type</label>
+        <locationX>698</locationX>
+        <locationY>2057</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Update_Related_Opportunity_StageFFSCONTRACT</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SobjectType</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Opportunity</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Contract_Income</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>RecordType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Grant_Opportunity_Record_Type</name>
+        <label>Get Grant Opportunity Record Type</label>
+        <locationX>714</locationX>
+        <locationY>1901</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_CONTRACT_INCOME_Opportunity_Record_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SobjectType</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Opportunity</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Grant</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>RecordType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Opp_Contract_Rec_Type</name>
+        <label>Get Opp Contract Rec Type</label>
+        <locationX>1372</locationX>
+        <locationY>1210</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Proc_Contract_Rec_Type_0</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SobjectType</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Contract</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Opportunity_Contract</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>RecordType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_OTHR_Contract_Rec_Type</name>
+        <label>Get Other Contract Rec Type</label>
+        <locationX>1372</locationX>
+        <locationY>1484</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>DECContract_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SobjectType</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Contract</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Other</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>RecordType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Proc_Contract_Rec_Type_0</name>
+        <label>Get Procurement Contract Rec Type</label>
+        <locationX>1373</locationX>
+        <locationY>1340</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_OTHR_Contract_Rec_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SobjectType</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Contract</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Procurement</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>RecordType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Related_Opportunity</name>
+        <label>Get Related Opportunity</label>
+        <locationX>689</locationX>
+        <locationY>492</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Update_Contract_NameWOppLink</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Related_Opportunity__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Contract_NameNoOpp</name>
+        <label>Update Contract Name No Opp</label>
+        <locationX>1636</locationX>
+        <locationY>811</locationY>
+        <connector>
+            <targetReference>Update_Description_Field_Length</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>FRMContractAutoName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Contract_NameWOppLink</name>
+        <label>Update Contract Name with Opp Link</label>
+        <locationX>689</locationX>
+        <locationY>725</locationY>
+        <connector>
+            <targetReference>Update_Description_Field_Length</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>FRMOppContractAutoName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Updates cost field for consulting contracts</description>
+        <name>Update_Cost_Field_with_max_allowable_compensation_number</name>
+        <label>Update Cost Field with max allowable compensation number</label>
+        <locationX>1374</locationX>
+        <locationY>971</locationY>
+        <connector>
+            <targetReference>Update_Document_Retention_if_Blank</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Procurement_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Consulting</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Maximum_allowable_compensation__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Cost__c</field>
+            <value>
+                <elementReference>$Record.Maximum_allowable_compensation__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Current_Account_History_with_End_Date</name>
+        <label>Update Current Account History with End Date</label>
+        <locationX>1739</locationX>
+        <locationY>290</locationY>
+        <connector>
+            <targetReference>Create_New_Contract_Status_History</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.CurConSgHst__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>EndDate__c</field>
+            <value>
+                <elementReference>FRMToday</elementReference>
+            </value>
+        </inputAssignments>
+        <object>NLContract_Stage_History__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Description_Field_Length</name>
+        <label>Update Description Field Length</label>
+        <locationX>1376</locationX>
+        <locationY>828</locationY>
+        <connector>
+            <targetReference>Update_Cost_Field_with_max_allowable_compensation_number</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>LenDescrip__c</field>
+            <value>
+                <elementReference>FRMDescFieldLength</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Document_Retention_if_Blank</name>
+        <label>Update Document Retention if Blank</label>
+        <locationX>1374</locationX>
+        <locationY>1091</locationY>
+        <connector>
+            <targetReference>Get_Opp_Contract_Rec_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Doc_Retention_Date__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Retain_Indefinitely__c</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Doc_Retention_Date__c</field>
+            <value>
+                <elementReference>FRMDocRetDefault</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Retain_Indefinitely__c</field>
+            <value>
+                <elementReference>FRMRetainIndefiniteDefault</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Opportunity_Stage_to_Written</name>
+        <label>Update Opportunity Stage to Written/Signed</label>
+        <locationX>1053</locationX>
+        <locationY>1833</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Related_Opportunity__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>MostRecentContract__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>Written/Signed</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Opportunity_When_Amendment_Is_Rejected</name>
+        <label>Update Opportunity When Amendment Is Rejected</label>
+        <locationX>452</locationX>
+        <locationY>1915</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>MostRecentContract__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>MostRecentContract__c</field>
+            <value>
+                <elementReference>$Record.Amended_Contract__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Related_Opportunities_Most_Recent_Contract</name>
+        <label>Update Related Opportunities Most Recent Contract</label>
+        <locationX>50</locationX>
+        <locationY>1548</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Related_Opportunity__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>MostRecentContract__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Related_Opportunity_Any_Other_Opportunity_Type</name>
+        <label>Update Related Opportunity for Grants</label>
+        <locationX>686</locationX>
+        <locationY>2393</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <elementReference>Get_CONTRACT_INCOME_Opportunity_Record_Type.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>MostRecentContract__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Probability</field>
+            <value>
+                <numberValue>90.0</numberValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>Verbal</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Related_Opportunity_StageFFSCONTRACT</name>
+        <label>Update Related Opportunity Stage Fee For Service</label>
+        <locationX>694</locationX>
+        <locationY>2229</locationY>
+        <connector>
+            <targetReference>Update_Related_Opportunity_Any_Other_Opportunity_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_CONTRACT_INCOME_Opportunity_Record_Type.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>MostRecentContract__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Probability</field>
+            <value>
+                <numberValue>90.0</numberValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>Sent Contract / Client Contracting Process Pending</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <start>
+        <locationX>1241</locationX>
+        <locationY>48</locationY>
+        <connector>
+            <targetReference>Contract_Status_Related_History</targetReference>
+        </connector>
+        <object>Contract</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>The status record created by this flow</description>
+        <name>VarNewStatusRecordID</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

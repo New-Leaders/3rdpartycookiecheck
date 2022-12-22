@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CkBforeSubP__c</fullName>
+    <description>Displays any issues with the procurement before submission.</description>
+    <externalId>false</externalId>
+    <formula>IF( ContractDue__c &lt; (TODAY() +7) &amp;&amp; ContractDue__c &gt;= (TODAY() +7)  &amp;&amp; ISBLANK( DateSubmitted__c ), &quot; 🛑 It usually takes five business days to process. It&#39;s unlikely this procurement can be fulfilled by the Due By Date.&quot;&amp;BR()&amp;BR(),&quot;&quot;)
+&amp;
+IF( ContractDue__c &lt;= TODAY()  &amp;&amp; ISBLANK( DateSubmitted__c ), &quot; 🛑 Please change the Due By Date, it cannot be in the past.&quot;&amp;BR()&amp;BR(),&quot;&quot;)
+
+&amp;
+IF( ContractDue__c &lt; ( DATEVALUE(DateSubmitted__c) +7) &amp;&amp; ISPICKVAL(LegalStatus__c ,&quot;Requested&quot;) ,&quot; 🛑 Please be aware that it&#39;s unlikely this procurement can be fulfilled by the Due By Date&quot;&amp;BR()&amp;BR(),&quot;&quot;)
+
+&amp;
+
+IF( $User.Id &lt;&gt; OwnerId ,&quot; 🛑 Please Change the Owner to Yourself in order to submit&quot;,&quot;&quot;)
+
+&amp;
+
+IF( 
+     OR(
+        !ISBLANK( Funding_Source_Related_Opportunity__c )
+        ,ISPICKVAL(Paid_by_Specific_Funding_Source__c,&quot;Yes&quot;)
+        )
+        
+        
+        
+         
+     &amp;&amp;  
+     OR (
+         ISPICKVAL(Funding_Source_Type__c,&quot;&quot;)
+        ,ISBLANK(Funding_Organization_Name__c)
+        ,ISBLANK( Funding_Source_Related_Opportunity__c )
+        ,ISPICKVAL(Paid_by_Specific_Funding_Source__c,&quot;No (Paid by general operating funds)&quot;)
+         )
+
+ , &quot; 🛑 Please enter a Funding Source Type, Funding Organization Name and Funding Source Related Opportunity to back up Paid By Specific Funding Source = Yes&quot;
+
+  ,&quot;&quot;)</formula>
+    <inlineHelpText>Displays any issues with the procurement before submission.  Please correct these before submitting.</inlineHelpText>
+    <label>Correct Before Submitting Procurement</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

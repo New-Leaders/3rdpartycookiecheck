@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Finance_Vendor_Approval_Reject_Notes__c</fullName>
+    <description>Reason Vendor was rejected by finance team</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Reason Vendor was rejected by finance team</inlineHelpText>
+    <label>Finance Vendor Approval/Reject Notes</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>TextArea</type>
+</CustomField>

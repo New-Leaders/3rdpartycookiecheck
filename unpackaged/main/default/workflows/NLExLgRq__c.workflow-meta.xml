@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>External_Legal_Created</fullName>
+        <ccEmails>legalteam@newleaders.org</ccEmails>
+        <description>External Legal Created For Legal</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>lkadetsky@newleaders.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>info@newleaders.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>ZBizSolAdminOnly/Vendor_Compliance_Form_Submitted</template>
+    </alerts>
+    <alerts>
+        <fullName>External_Legal_CreatedFinance</fullName>
+        <ccEmails>paymentstatus@newleaders.org</ccEmails>
+        <description>External Legal Created For Finance</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>salveranga@newleaders.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>noreply-coms@newleaders.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>ZBizSolAdminOnly/Vendor_Compliance_Form_Submitted</template>
+    </alerts>
+    <alerts>
+        <fullName>External_Legal_Request_Finance_and_Legal</fullName>
+        <ccEmails>legalteam@newleaders.org</ccEmails>
+        <ccEmails>paymentstatus@newleaders.org</ccEmails>
+        <description>External Legal Request Finance and Legal</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>lkadetsky@newleaders.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>ZBizSolAdminOnly/Vendor_Compliance_Finance_Rejected</template>
+    </alerts>
+</Workflow>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RforSub__c</fullName>
+    <description>Determines True if Program Implementation Opportunity is ready to submit</description>
+    <externalId>false</externalId>
+    <formula>IF( ContractDue__c &lt;= TODAY() &amp;&amp; ISBLANK(DateSubmitted__c) ,False,
+
+IF(ISBLANK(Account.Account_Recognition_Name__c )=True,False,
+
+IF(RecordType.DeveloperName =&quot;Opportunity_Contract&quot; &amp;&amp; (( Related_Opportunity__r.NoPurposes_Allocated__c =0 || ISBLANK(Related_Opportunity__r.NoPurposes_Allocated__c)) ) &amp;&amp; !ISPICKVAL(Opportunity_Contract_Type__c ,&quot;Other&quot;) , False,
+
+
+IF(ISBLANK(Related_Opportunity__c)=True &amp;&amp; RecordType.DeveloperName= &#39;Opportunity_Contract&#39; &amp;&amp;!ISPICKVAL(Opportunity_Contract_Type__c ,&quot;Other&quot;) , False,
+
+
+IF( LenDescrip__c =0,False,
+/*
+IF(ISBLANK(Related_Opportunity__r.ProgLnchExpDate__c)=True &amp;&amp; ISPICKVAL(Opportunity_Contract_Type__c,&quot;Program Implementation&quot;) = True,False,*/
+
+
+/*
+IF( Related_Opportunity__r.LnScop__c = 0 &amp;&amp; Related_Opportunity__r.RecordType.DeveloperName =&quot;Contract_Income&quot; &amp;&amp; RecordType.DeveloperName =&quot;Opportunity_Contract&quot; &amp;&amp; CONTAINS( Related_Opportunity__r.Programs_Allocated__c , &quot;Flex&quot;) , False,
+
+IF(ISBLANK( Related_Opportunity__r.Audiences__c )=True &amp;&amp; CONTAINS(Related_Opportunity__r.Programs_Allocated__c , &quot;Flex&quot;) &amp;&amp; Related_Opportunity__r.RecordType.DeveloperName =&quot;Contract_Income&quot; , False,*/
+
+True)))))/*)) )*/</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Determines True if Program Implementation Opportunity is ready to submit</inlineHelpText>
+    <label>ReadyforSubmit?</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

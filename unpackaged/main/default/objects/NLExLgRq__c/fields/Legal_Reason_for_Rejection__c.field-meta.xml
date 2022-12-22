@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Legal_Reason_for_Rejection__c</fullName>
+    <description>Legal/Finance team&#39;s short explanation for rejecting vendor documents</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Legal/Finance team&#39;s short explanation for rejecting vendor documents</inlineHelpText>
+    <label>Reason for Rejection</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

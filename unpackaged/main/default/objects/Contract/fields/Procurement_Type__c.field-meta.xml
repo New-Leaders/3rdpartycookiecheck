@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Procurement_Type__c</fullName>
+    <description>Buckets of types of procurements - drives path towards vendor document collection - legal request record creation flows</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If this contract is a Procurement please select the type.</inlineHelpText>
+    <label>Procurement Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Consulting</fullName>
+                <default>false</default>
+                <label>Consulting</label>
+            </value>
+            <value>
+                <fullName>Lease</fullName>
+                <default>false</default>
+                <label>Lease</label>
+            </value>
+            <value>
+                <fullName>Materials</fullName>
+                <default>false</default>
+                <label>Materials</label>
+            </value>
+            <value>
+                <fullName>Non-Consulting Services</fullName>
+                <default>false</default>
+                <label>Non-Consulting Services</label>
+            </value>
+            <value>
+                <fullName>Hotel</fullName>
+                <default>false</default>
+                <label>Hotel</label>
+            </value>
+            <value>
+                <fullName>Restaurants/catering</fullName>
+                <default>false</default>
+                <label>Restaurants/catering</label>
+            </value>
+            <value>
+                <fullName>Copyright license</fullName>
+                <default>false</default>
+                <label>Copyright license</label>
+            </value>
+            <value>
+                <fullName>Space rental</fullName>
+                <default>false</default>
+                <label>Space rental</label>
+            </value>
+            <value>
+                <fullName>Technology hardware purchase/lease</fullName>
+                <default>false</default>
+                <label>Technology hardware purchase/lease</label>
+            </value>
+            <value>
+                <fullName>Technology subscriptions/software</fullName>
+                <default>false</default>
+                <label>Technology subscriptions/software</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

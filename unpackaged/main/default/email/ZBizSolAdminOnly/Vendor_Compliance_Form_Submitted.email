@@ -1,0 +1,10 @@
+A document collection request has been submitted for review.  Please review within X days to approve or reject the request. 
+
+Click here to review and set up a docusign request
+https://newleaders.lightning.force.com/{!NLExLgRq__c.Id}
+
+
+Contract {!NLExLgRq__c.Ctrt__c}
+https://newleaders.lightning.force.com/{!NLExLgRq__c.CtrtId__c}
+
+{!NLExLgRq__c.Account__c}

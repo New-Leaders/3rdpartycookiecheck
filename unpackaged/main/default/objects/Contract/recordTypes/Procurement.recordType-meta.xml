@@ -1,0 +1,1185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Procurement</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>Contract_Lightning</compactLayoutAssignment>
+    <description>Choose this option when New Leaders is paying for materials or a service (Cash Out).  Ex. Purchase Orders, Materials, and Consulting Contracts.</description>
+    <label>Procurement</label>
+    <picklistValues>
+        <picklist>Access_to_confidential_information__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Affected_Program_Locations__c</picklist>
+        <values>
+            <fullName>Arlington</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Baltimore</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bay Area</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chicago</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cleveland</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Denver</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Florida</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jacksonville</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jersey City</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kansas City</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Los Angeles</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Louisiana</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MIDWEST</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Maryland</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Memphis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NATIONAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New York</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Newark</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Washington DC</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>BackgrndChecksReq__c</picklist>
+        <values>
+            <fullName>N%2FA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Sure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ClientAddlInsureReq__c</picklist>
+        <values>
+            <fullName>N%2FA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Sure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Contract_Status__c</picklist>
+        <values>
+            <fullName>Amendment to Existing Contract</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Contract</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Cost_Range__c</picklist>
+        <values>
+            <fullName>%240 - %243%2C500</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%24150%2C000%2B</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%243%2C501 - %24149%2C999</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Department_to_be_Charged__c</picklist>
+        <values>
+            <fullName>%28105%29 Emerging Leaders Program</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28106%29 Team Leadership</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28107%29 Observation and Coaching</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28108%29 ILT Summits</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28125%29 Aspiring Principals Residency</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28190%29 Program Management</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28194%29 Adjunct Trainer Admin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28195%29 Content Development</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28196%29 Program Design</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28197%29 Organizational Learning</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28225%29 National Aspiring Principals Fellowship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28260%29 Accreditation %26 Approvals</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28295%29 Assessments</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28296%29 Leadership Academy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28345%29 Evaluation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28350%29 Policy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28355%29 Alumni Impact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28415%29 Custom Program %28Flex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28416%29 Leading %26 Learning Workshops</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28440%29 Breakthrough Leadership-Assistant Principals</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28441%29 Breakthrough Leadership-Principals</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28442%29 Breakthrough Leadership-Principal Supervisors</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28444%29 Coaching %26 Strategic Leadership Support %28all roles%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28445%29 Principal Coaching</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28451%29 Strengthening System Level Leadership %28PS%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28460%29 Strategic Partnerships Gen Ops</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28461%29 Leadership coaching</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28462%29 Strategic advising</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28463%29 Leadership team development</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28469%29 Stand alone offerings</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28490%29 Innovation Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28840%29 National Program Implementation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28845%29 CPO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28850%29 CEO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28900%29 Marketing %26 Communications</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28905%29 Sales %26 Marketing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28910%29 Fundraising</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28920%29 PDHR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28930%29 Facilities and Admin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28950%29 Finance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28955%29 Innovation for Equity</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28960%29 IT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28970%29 Business Solutions</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%28980%29 Legal %26 Operations Management</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Docs_Attached__c</picklist>
+        <values>
+            <fullName>Acknowledgement Letter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amendment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Anti-Lobbying</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Background Investigation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confidentiality Training</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Debarment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executed Agreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flowdowns</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IC Forms</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NDA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RFP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SOW</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Fiscal_Year__c</picklist>
+        <values>
+            <fullName>FY15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY16</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY17</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY18</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY19</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY20</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Fiscal_Years_s__c</picklist>
+        <values>
+            <fullName>FY02</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY03</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY04</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY05</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY06</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY07</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY08</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY09</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY11</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY12</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY13</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY14</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY16</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY17</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY18</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY19</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY21</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY22</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY24</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FY25</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>FrmRFP__c</picklist>
+        <values>
+            <fullName>N%2FA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Sure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Function_Team__c</picklist>
+        <values>
+            <fullName>Alumni Impact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fiscal Sponsorship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Higher Education Partnerships</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>National Aspiring Principals Fellowship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>National Program Implementation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Programs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Research%2C Evaluation and Policy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Shared Services</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Funding_Source_Approval__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Funding_Source_Type__c</picklist>
+        <values>
+            <fullName>Federal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Local</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Private</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>State</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Internal_Department__c</picklist>
+        <values>
+            <fullName>Academic Programs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Academic Staff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bay Area Program</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CEO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Charlotte Program</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chicago Program</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Community Program</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Community Programs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EPIC DCPS Partnership</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EPIC Knowledge System</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EPIC Memphis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EPIC Operations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EPIC Programs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EPIC in Charter Schools</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>External Affairs Operations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>External Affairs Strategy and Planning</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financial Operations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financial Strategy and Analysis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Foundation and Corporate Partnerships</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Governmental Relations and Public Policy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greater New Orleans Program</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greater New York Program</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Human Resources</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Leadership Development</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Leading Educators</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Legal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Marketing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Maryland Program</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Memphis Program</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Milwaukee Program</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>National Cities Staff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Office Operations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Operations and Business Systems</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Program Alignment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Program Delivery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Public Funding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Research and Consulting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Research and Policy Development</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SKD Staff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technology and Communication Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Washington DC Program</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>LegalStatus__c</picklist>
+        <values>
+            <fullName>Contract Sent to Team</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Draft Pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fully Executed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pipeline</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Requested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Signature Pending</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>LglMutConfOp__c</picklist>
+        <values>
+            <fullName>Option 1%3A Eval Future Business Relationship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Option 2%3A Discussing Confidential Projects</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Option 3%3A Delivery of Program Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Option 4%3A Supporting Project</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Multiple_Sources_Considered__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>NLInsuranceCertReq__c</picklist>
+        <values>
+            <fullName>N%2FA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Sure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>NewGovRegReq__c</picklist>
+        <values>
+            <fullName>N%2FA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Sure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Opportunity_Contract_Type__c</picklist>
+        <values>
+            <fullName>Grant</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Paid_by_Specific_Funding_Source__c</picklist>
+        <values>
+            <fullName>No %28Paid by general operating funds%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>PayMethod__c</picklist>
+        <values>
+            <fullName>Credit Card</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Invoiced Check or ACH</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Pay_Frequency__c</picklist>
+        <values>
+            <fullName>Annual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Daily</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hourly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Monthly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Never</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Project Fee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Weekly</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Price_Comparison_Type__c</picklist>
+        <values>
+            <fullName>Catalogs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Published</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verbal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Written</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Procurement_Instrument__c</picklist>
+        <values>
+            <fullName>Honorarium</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Procurement Contract</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Purchase Order</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Procurement_Type__c</picklist>
+        <values>
+            <fullName>Consulting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Copyright license</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hotel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lease</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Materials</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-Consulting Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Restaurants%2Fcatering</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Space rental</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technology hardware purchase%2Flease</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technology subscriptions%2Fsoftware</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Program_Type__c</picklist>
+        <values>
+            <fullName>Aspiring Principals</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Consulting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Emerging Leaders</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Leading Instruction</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Principal Institute</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Principal Supervisors</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transforming Teams</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>PurOConInfo__c</picklist>
+        <values>
+            <fullName>Option 1%3A to inform negotiations about a potential transaction or collaboration</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Option 2%3A to discuss confidential projects while a contract is negotiated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Option 3%3A to collaborate to deliver programming or services as directed by the client</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Option 4%3A to support a project</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>SchoolYrs__c</picklist>
+        <values>
+            <fullName>SY18</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SY19</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SY20</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Small_Business_Type__c</picklist>
+        <values>
+            <fullName>Labor Surplus Area Firm</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Minority Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Small Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Woman%27s Business Enterprise</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sole_Source_Criteria__c</picklist>
+        <values>
+            <fullName>Extreme urgency</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Limited qualified vendor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Only one response received</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre-approved by grantor%2Fprime contractor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proprietary item %28unique requirements%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Required by sponsor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unique or prior experience</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status</picklist>
+        <values>
+            <fullName>Cancelled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Draft- Not Submitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Final</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sent- Pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Terminated</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>SummaryDraft__c</picklist>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Started</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Vendor_debarred__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>
